@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta content="width=device-width, initial-scale=1.0" name="viewport">
+	<title>QR Code Generator</title>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+	<link href="styles.css" rel="stylesheet">
+	<script src="index.js"></script>
+	<meta content="yes" name="mobile-web-app-capable">
+	<meta content="yes" name="apple-mobile-web-app-capable">
+	<meta content="width=device-width, initial-scale=1.0" name="viewport">
+	<link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png">
+	<link rel="manifest" href="assets/site.webmanifest">
+</head>
+<body>
+	<div class="container">
+		<h1>QR Code Generator</h1>
+
+		<div>
+			<input id="text" placeholder="Enter text or URL to encode in QR code" type="text" value="">
+		</div>
+
+		<br/>
+		<div class="tabs">
+			<div class="tab active" onclick="openTab(event, 'basicOptions')">Basic Options</div>
+			<div class="tab" onclick="openTab(event, 'styleOptions')">Style Options</div>
+			<div class="tab" onclick="openTab(event, 'logoOptions')">Logo Options</div>
+		</div>
+
+		<div class="tab-content active" id="basicOptions">
+			<div class="controls">
+				<div class="control-group">
+					<label for="size">QR Code Size:</label>
+					<select id="size">
+						<option value="128">Small (128×128)</option>
+						<option selected value="200">Medium (200×200)</option>
+						<option value="300">Large (300×300)</option>
+						<option value="400">X-Large (400×400)</option>
+					</select>
+				</div>
+
+				<div class="control-group">
+					<label for="errorCorrectionLevel">Error Correction:</label>
+					<select id="errorCorrectionLevel">
+						<option value="L">Low (7%)</option>
+						<option value="M">Medium (15%)</option>
+						<option value="Q">Quartile (25%)</option>
+						<option selected value="H">High (30%)</option>
+					</select>
+				</div>
+			</div>
+		</div>
+
+		<div class="tab-content" id="styleOptions">
+			<div class="controls">
+<!--				TODO: Fix these controls -->
+<!--				<div class="control-group">-->
+<!--					<label for="dotStyle">Dot Style:</label>-->
+<!--					<select id="dotStyle">-->
+<!--						<option selected value="square">Square (Default)</option>-->
+<!--						<option value="dots">Dots</option>-->
+<!--						<option value="rounded">Rounded</option>-->
+<!--						<option value="classy">Classy</option>-->
+<!--						<option value="classy-rounded">Classy Rounded</option>-->
+<!--					</select>-->
+<!--				</div>-->
+
+<!--				<div class="control-group">-->
+<!--					<label for="cornerStyle">Corner Style:</label>-->
+<!--					<select id="cornerStyle">-->
+<!--						<option selected value="square">Square (Default)</option>-->
+<!--						<option value="rounded">Rounded</option>-->
+<!--						<option value="extra-rounded">Extra Rounded</option>-->
+<!--					</select>-->
+<!--				</div>-->
+			</div>
+
+			<div class="controls">
+				<div class="control-group">
+					<label for="foregroundColor">Foreground Color:</label>
+					<input id="foregroundColor" type="color" value="#000000">
+				</div>
+
+				<div class="control-group">
+					<label for="backgroundColor">Background Color:</label>
+					<input id="backgroundColor" type="color" value="#ffffff">
+				</div>
+			</div>
+		</div>
+
+		<div class="tab-content" id="logoOptions">
+			<div class="control-group">
+				<label for="logoSize">Logo Size (% of QR):</label>
+				<select id="logoSize">
+					<option value="0.1">10%</option>
+					<option value="0.15">15%</option>
+					<option selected value="0.2">20%</option>
+					<option value="0.25">25%</option>
+					<option value="0.3">30%</option>
+				</select>
+			</div>
+
+			<div class="control-group">
+				<label class="file-upload-label" for="fileUpload">
+					Upload Logo/Image
+				</label>
+				<input accept="image/*" id="fileUpload" type="file">
+				<div class="preview-container">
+					<img alt="Logo Preview" id="imagePreview" src="">
+					<button id="removeLogo" style="display: none;">Remove Logo</button>
+				</div>
+			</div>
+		</div>
+
+		<br/><br/>
+
+		<div class="actionButtons">
+			<button id="generate">Generate QR Code</button>
+		</div>
+		<div>
+			<button class="download-btn" id="downloadBtn" style="display: none;">Download as PNG</button>
+			<button class="download-btn" id="downloadSvgBtn" style="display: none;">Download as SVG</button>
+		</div>
+
+		<div id="qrcode"></div>
+		<canvas id="qrCanvas"></canvas>
+		<div class="error" id="error"></div>
+
+	</div>
+
+</body>
+</html>
