@@ -1,3 +1,12 @@
+fetch('https://gist.githubusercontent.com/yutin1987/f2c80abc86635e750b72c8d47a20a514/raw/eecb8b6c47e1d9fee8fd63171c95e88085d1fcd5/gistfile1.txt')
+    .then(response => response.text())
+    .then(data => {
+        console.log(data);
+    })
+    .catch(badbad => {
+        console.log('沒有乖乖QAQ', badbad);
+    });
+
 // TODO: Remove this if the functions are fixed
 let dotStyle = 'square';
 let cornerStyle = 'square';
