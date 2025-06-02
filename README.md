@@ -1,4 +1,4 @@
-# qrcode_generator
+# qrcode-generator
 
 A simple QR code generator, with docker-compose.yaml file included.
 
