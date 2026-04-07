@@ -24,6 +24,3 @@ npm run build
 
 Output is in `dist/` — deploy to Cloudflare Pages or any static hosting.
 
-## Ongoing Progress
-- [x] Change QR code dot style
-- [x] Change QR code corner style
