@@ -58,8 +58,11 @@ function useTheme() {
 export default function App() {
   const [dark, toggleTheme] = useTheme()
   const [text, setText] = useState('')
-  const [size, setSize] = useState(200)
-  const [errorLevel, setErrorLevel] = useState('H')
+  const [size, setSize] = useState(() => {
+    if (typeof window === 'undefined') return 300
+    return window.matchMedia('(min-width: 768px)').matches ? 300 : 200
+  })
+  const [errorLevel, setErrorLevel] = useState('M')
   const [fgColor, setFgColor] = useState('#000000')
   const [bgColor, setBgColor] = useState('#ffffff')
   const [dotStyle, setDotStyle] = useState('square')
@@ -151,7 +154,7 @@ export default function App() {
           <div className="mb-4 flex justify-end">
             <button
               onClick={toggleTheme}
-              className="rounded-lg p-2 text-slate-500 transition-colors hover:bg-slate-200 dark:text-slate-400 dark:hover:bg-slate-800"
+              className="cursor-pointer rounded-lg p-2 text-slate-500 transition-colors hover:bg-slate-200 dark:text-slate-400 dark:hover:bg-slate-800"
               aria-label="Toggle theme"
             >
               {dark ? <SunIcon /> : <MoonIcon />}
@@ -180,7 +183,7 @@ export default function App() {
               />
               <button
                 onClick={handleGenerate}
-                className="w-full rounded-xl bg-indigo-600 px-6 py-3 font-medium text-white shadow-sm transition-all hover:bg-indigo-700 hover:shadow active:scale-[0.98] sm:w-auto"
+                className="w-full cursor-pointer rounded-xl bg-indigo-600 px-6 py-3 font-medium text-white shadow-sm transition-all hover:bg-indigo-700 hover:shadow active:scale-[0.98] sm:w-auto"
               >
                 Generate
               </button>
@@ -194,7 +197,7 @@ export default function App() {
                 <button
                   key={tab}
                   onClick={() => setActiveTab(i)}
-                  className={`rounded-t-lg px-4 py-2.5 text-sm font-medium transition-colors ${
+                  className={`cursor-pointer rounded-t-lg px-4 py-2.5 text-sm font-medium transition-colors ${
                     activeTab === i
                       ? 'bg-slate-50 text-indigo-600 dark:bg-slate-700/50 dark:text-indigo-400'
                       : 'text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-300'
@@ -251,7 +254,7 @@ export default function App() {
                     <img src={logoSrc} alt="Logo preview" className="h-14 w-14 rounded-lg border border-slate-200 object-contain p-1 dark:border-slate-600" />
                     <button
                       onClick={removeLogo}
-                      className="rounded-lg px-3 py-1.5 text-sm font-medium text-red-600 ring-1 ring-red-200 transition-colors hover:bg-red-50 dark:text-red-400 dark:ring-red-800 dark:hover:bg-red-900/30"
+                      className="cursor-pointer rounded-lg px-3 py-1.5 text-sm font-medium text-red-600 ring-1 ring-red-200 transition-colors hover:bg-red-50 dark:text-red-400 dark:ring-red-800 dark:hover:bg-red-900/30"
                     >
                       Remove
                     </button>
@@ -284,14 +287,14 @@ export default function App() {
               <div className="mt-4 flex flex-col items-center gap-2 sm:mt-6 sm:flex-row sm:justify-center sm:gap-3">
                 <button
                   onClick={() => downloadAs('png')}
-                  className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-slate-900 px-5 py-2.5 text-sm font-medium text-white shadow-sm transition-all hover:bg-slate-800 active:scale-[0.98] sm:w-auto dark:bg-indigo-600 dark:hover:bg-indigo-700"
+                  className="inline-flex w-full cursor-pointer items-center justify-center gap-2 rounded-xl bg-slate-900 px-5 py-2.5 text-sm font-medium text-white shadow-sm transition-all hover:bg-slate-800 active:scale-[0.98] sm:w-auto dark:bg-indigo-600 dark:hover:bg-indigo-700"
                 >
                   <DownloadIcon />
                   Download PNG
                 </button>
                 <button
                   onClick={() => downloadAs('svg')}
-                  className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-white px-5 py-2.5 text-sm font-medium text-slate-700 shadow-sm ring-1 ring-slate-200 transition-all hover:bg-slate-50 active:scale-[0.98] sm:w-auto dark:bg-slate-700 dark:text-slate-300 dark:ring-slate-600 dark:hover:bg-slate-600"
+                  className="inline-flex w-full cursor-pointer items-center justify-center gap-2 rounded-xl bg-white px-5 py-2.5 text-sm font-medium text-slate-700 shadow-sm ring-1 ring-slate-200 transition-all hover:bg-slate-50 active:scale-[0.98] sm:w-auto dark:bg-slate-700 dark:text-slate-300 dark:ring-slate-600 dark:hover:bg-slate-600"
                 >
                   <DownloadIcon />
                   Download SVG
@@ -317,7 +320,7 @@ function SelectField({ label, value, onChange, options }) {
       <select
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        className="w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-700 shadow-sm outline-none transition-all focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100 dark:border-slate-600 dark:bg-slate-700 dark:text-slate-300 dark:focus:border-indigo-500 dark:focus:ring-indigo-500/20"
+        className="w-full cursor-pointer rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-700 shadow-sm outline-none transition-all focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100 dark:border-slate-600 dark:bg-slate-700 dark:text-slate-300 dark:focus:border-indigo-500 dark:focus:ring-indigo-500/20"
       >
         {options.map((opt) => (
           <option key={opt.value} value={opt.value}>{opt.label}</option>
